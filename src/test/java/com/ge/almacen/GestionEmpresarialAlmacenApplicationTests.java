@@ -22,7 +22,9 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ge.almacen.controller.AccesoController;
 import com.ge.almacen.model.Acceso;
+import com.ge.almacen.model.PersonaJuridica;
 import com.ge.almacen.repository.AccesoRepository;
+import com.ge.almacen.repository.PersonaRepository;
 
 @Profile("dev")/*PARA TRABAJAR CON ARCHIVO application-dev.properties*/
 @SpringBootTest(classes = GestionEmpresarialAlmacenApplication.class)
@@ -49,7 +51,7 @@ public class GestionEmpresarialAlmacenApplicationTests {
 		
 		ObjectMapper objectMapper = new ObjectMapper();
 		
-		ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.post("/guardarAcceso")
+		ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.post("/acceso")
 										.content(objectMapper.writeValueAsString(acceso))
 										.accept(MediaType.APPLICATION_JSON)
 										.contentType(MediaType.APPLICATION_JSON));
@@ -104,7 +106,7 @@ public class GestionEmpresarialAlmacenApplicationTests {
 		
 		ObjectMapper objectMapper = new ObjectMapper();
 		
-		ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.delete("/eliminarAccesoPorId/" + acceso.getId())
+		ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.delete("/acceso/" + acceso.getId())
 										.content(objectMapper.writeValueAsString(acceso))
 										.accept(MediaType.APPLICATION_JSON)
 										.contentType(MediaType.APPLICATION_JSON));
@@ -131,7 +133,7 @@ public class GestionEmpresarialAlmacenApplicationTests {
 		
 		ObjectMapper objectMapper = new ObjectMapper();
 		
-		ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.get("/buscarAccesoPorId/" + acceso.getId())
+		ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.get("/acceso/" + acceso.getId())
 										.content(objectMapper.writeValueAsString(acceso))
 										.accept(MediaType.APPLICATION_JSON)
 										.contentType(MediaType.APPLICATION_JSON));
@@ -224,6 +226,8 @@ public class GestionEmpresarialAlmacenApplicationTests {
 		accesoRepository.deleteById(acesso.getId());
 		
 	}
+	
+	
 }
 
 

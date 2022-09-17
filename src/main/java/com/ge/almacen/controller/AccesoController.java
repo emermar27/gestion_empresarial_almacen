@@ -22,7 +22,7 @@ import com.ge.almacen.service.AccesoService;
 
 @Controller
 @RestController
-@RequestMapping
+@RequestMapping("/acceso")
 public class AccesoController {
 	
 	@Autowired
@@ -32,7 +32,7 @@ public class AccesoController {
 	private AccesoRepository accesoRepository;
 	
 	@ResponseBody /*Poder dar un retorno a la API*/
-	@PostMapping(value = "**/guardarAcceso") /*Mapear la URL para recibir JSON*/
+	@PostMapping() /*Mapear la URL para recibir JSON*/
 	public ResponseEntity<Acceso> guardar(@RequestBody Acceso acceso) throws ExeptionApi { /*Recibir el JSON y convertir para objeto*/
 		
 		if(acceso.getId() == null) {
@@ -59,7 +59,7 @@ public class AccesoController {
 
 
 	@ResponseBody /*Poder dar un retorno a la API*/
-	@DeleteMapping(value = "**/eliminarAccesoPorId/{id}") /*Mapear la URL para recibir JSON*/
+	@DeleteMapping("/{id}") /*Mapear la URL para recibir JSON*/
 	public ResponseEntity<?> eliminar(@PathVariable("id") Long id) { /*Recibir el JSON y convertir para objeto*/
 		
 		accesoService.eliminarPorId(id);
@@ -68,7 +68,7 @@ public class AccesoController {
 	}
 	
 	@ResponseBody /*Poder dar un retorno a la API*/
-	@GetMapping(value = "**/buscarAccesoPorId/{id}")
+	@GetMapping("/{id}")
 	public ResponseEntity<Acceso> buscarPorId(@PathVariable("id") Long id) throws ExeptionApi {
 		
 		Acceso acceso = accesoRepository.findById(id).orElse(null);
@@ -86,7 +86,7 @@ public class AccesoController {
 	
 	@ResponseBody /*Poder dar un retorno a la API*/
 	@GetMapping(value = "**/buscarAccesoPorDes/{desc}")
-	public ResponseEntity<List<Acceso>> buscarPorId(@PathVariable("desc") String desc) {
+	public ResponseEntity<List<Acceso>> buscarPorDes(@PathVariable("desc") String desc) {
 		
 		List<Acceso> acceso = accesoService.buscarAccesoPorDesc(desc.toUpperCase());
 		
